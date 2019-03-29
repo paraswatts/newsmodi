@@ -1,16 +1,16 @@
 DROP DATABASE IF EXISTS news;
 CREATE DATABASE news;
 
-\c news;
 
-CREATE TABLE news_articles (
+CREATE TABLE news_articles
+(
   ID SERIAL PRIMARY KEY,
   source jsonb,
   author VARCHAR,
   description VARCHAR,
   url VARCHAR,
   urlToImage VARCHAR,
-  publishedAt VARCHAR 
+  publishedAt VARCHAR
 );
 
 

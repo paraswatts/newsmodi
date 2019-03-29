@@ -9,15 +9,20 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 var promise = require('bluebird');
 const { Pool, Client } = require('pg')
-
+const connectionString = "postgres://phblpwiezukxiw:8d336b31b3688b9c76e349e8d488ef349edb3eb2035004d158ebea869d3f34c8@ec2-23-21-136-232.compute-1.amazonaws.com:5432/d830i11vl0l42m"
+console.log("conn", connectionString)
 const pool = new Pool({
-    user: 'bharatsmart',
-    host: 'localhost',
-    database: 'news',
-    password: 'namo2019',
+    user: 'brfexwcmlnvlkl',
+    host: 'ec2-23-21-136-232.compute-1.amazonaws.com',
+    database: 'd8nukkgmf37as6',
+    password: '161337aa14a8e3aa96c9589bd16e10ac14942367ca25bc69b41d04246a56d822',
     port: 5432,
 })
+// const pool = new Pool({
+//     connectionString: connectionString,
+// })
 
+pg.defaults.ssl = true;
 
 
 var News = require('./News');
@@ -143,7 +148,7 @@ router.get('/', function (req, res) {
     //     })
     // })
     pool.connect((errPool, client, done) => {
-
+        console.log("client", client, errPool)
         client.query('select * from news_articles limit ' + limit + ' OFFSET ' + skip, (err, response) => {
             console.log(err, response)
             if (response) {
